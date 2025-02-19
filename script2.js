@@ -13,6 +13,8 @@ if (!gl) {
     alert("congrats, WebGL is supported")
 }
 
+
+
 function createShader(gl, type, source) {
     var shader = gl.createShader(type);
     gl.shaderSource(shader, source);
@@ -55,12 +57,22 @@ var positionBuffer = gl.createBuffer();
 
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
+
+
+
+
 // three 2d points
 var positions = [
     0, 0,
     0, 0.5,
     0.7, 0,
 ];
+
+
+
+
+
+
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
 
@@ -88,5 +100,7 @@ var offset = 0;        // start at the beginning of the buffer
 gl.vertexAttribPointer(
     positionAttributeLocation, size, type, normalize, stride, offset)
 
-
-// attribute vec4 a_position; 
+var primitiveType = gl.TRIANGLES;
+var offset = 0;
+var count = 3;
+gl.drawArrays(primitiveType, offset, count);
