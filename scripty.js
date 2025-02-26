@@ -45,7 +45,7 @@ async function main() {
 
 
 
-        
+
         // Get a WebGPU context from the canvas and configure it
         const canvas = document.querySelector('canvas');
         const context = canvas.getContext('webgpu');
@@ -66,10 +66,10 @@ async function main() {
                 vec2f(-0.5, -0.5),  // bottom left
                 vec2f( 0.5, -0.5)   // bottom right
               );
-       
+
               return vec4f(pos[vertexIndex], 0.0, 1.0);
             }
-       
+
             @fragment fn fs() -> @location(0) vec4f {
               return vec4f(1.0, 0.0, 0.0, 1.0);
             }
@@ -107,20 +107,20 @@ async function main() {
           // set it as the texture to render to.
           renderPassDescriptor.colorAttachments[0].view =
               context.getCurrentTexture().createView();
-       
+
           // make a command encoder to start encoding commands
           const encoder = device.createCommandEncoder({ label: 'our encoder' });
-       
+
           // make a render pass encoder to encode render specific commands
           const pass = encoder.beginRenderPass(renderPassDescriptor);
           pass.setPipeline(pipeline);
           pass.draw(3);  // call our vertex shader 3 times
           pass.end();
-       
+
           const commandBuffer = encoder.finish();
           device.queue.submit([commandBuffer]);
         }
-       
+
         render();
 
 
@@ -149,3 +149,115 @@ async function main() {
 }
 
 main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async function main() {
+//   try {
+//     const adapter = await navigator.gpu?.requestAdapter();
+//     if (!adapter) {
+//       alert("webgpu  not found")
+//       console.error('WebGPU adapter not found.  Check your browser and hardware support.');
+//       return; //Exit if no adapter
+//     }
+
+//     const device = await adapter.requestDevice();
+//     if (!device) {
+//       alert("failed to get webgpu")
+//       console.error('Failed to get WebGPU device. This might be due to resource limitations or permission issues.');
+//       return; //Exit if no device
+//     }
+
+//     console.log('WebGPU device successfully obtained:', device);
+//     alert("webgpu successfully started")
+
+//     async function main() {
+//       try {
+//         const adapter = await navigator.gpu?.requestAdapter();
+//         if (!adapter) {
+//           alert("webgpu  not found")
+//           console.error('WebGPU adapter not found.  Check your browser and hardware support.');
+//           return; //Exit if no adapter
+//         }
+
+//         const device = await adapter.requestDevice();
+//         if (!device) {
+//           alert("failed to get webgpu")
+//           console.error('Failed to get WebGPU device. This might be due to resource limitations or permission issues.');
+//           return; //Exit if no device
+//         }
+
+//         console.log('WebGPU device successfully obtained:', device);
+//         alert("webgpu successfully started")
+//         // V START OF CODE V
+
+
+
+
+
+
+
+
+
+
+//         const module = device.createShaderModule({
+//           label: 'doubling compute module',
+//           code: `
+//             @group(0) @binding(0) var<storage, read_write> data: array<f32>;
+       
+//             @compute @workgroup_size(1) fn computeSomething(
+//               @builtin(global_invocation_id) id: vec3u
+//             ) {
+//               let i = id.x;
+//               data[i] = data[i] * 2.0;
+//             }
+//           `,
+//         });
+
+        
+
+
+
+
+
+
+
+
+
+
+//         // ^ END OF CODE ^
+//       } catch (error) {
+//         alert("and error happened")
+//         console.error('An error occurred:', error);
+//       }
+//     }
+
+//     main();
+
+
+//   } catch (error) {
+//     alert("and error happened")
+//     console.error('An error occurred:', error);
+//   }
+// }
+
+// main();
