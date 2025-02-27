@@ -89,8 +89,9 @@ async function main() {
             return vsOutput;
             }
 
-            @fragment fn fs(fsInput: OurVertexShaderOutput) -> @location(0) vec4f {
-            return fsInput.color;
+
+            @fragment fn fs(@location(0) color: vec4f) -> @location(0) vec4f {
+            return color;
             }
           `,
         });
